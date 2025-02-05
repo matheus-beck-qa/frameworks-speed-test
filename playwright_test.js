@@ -1,5 +1,5 @@
 import { chromium } from 'playwright';
-const assert = require('assert');
+import assert from 'assert';
 (async () => {
     const startTime = Date.now();
     const browser = await chromium.launch({ headless: true, channel: 'chrome' });

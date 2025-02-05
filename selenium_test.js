@@ -1,6 +1,6 @@
 import { Builder, By, until } from 'selenium-webdriver';
 import { expect } from 'chai';
-import chrome from 'selenium-webdriver/chrome';
+import chrome from 'selenium-webdriver/chrome.js';
 (async function seleniumCheckoutTest() {
   const driver = await new Builder().forBrowser('chrome').setChromeOptions(new chrome.Options().addArguments('--headless')).build();
   const startTime = Date.now();
