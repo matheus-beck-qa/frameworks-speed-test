@@ -8,6 +8,7 @@
     "test:playwright": "node playwright_test.js",
     "test:all": "npm run test:cypress && npm run test:playwright && npm run test:selenium"
   },
+  "type": "module",
   "keywords": [],
   "author": "",
   "license": "ISC",
