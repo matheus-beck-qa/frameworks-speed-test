@@ -1,8 +1,8 @@
-const { chromium } = require('playwright');
+import { chromium } from 'playwright';
 const assert = require('assert');
 (async () => {
     const startTime = Date.now();
-    const browser = await chromium.launch({ headless: true });
+    const browser = await chromium.launch({ headless: true, channel: 'chrome' });
     const page = await browser.newPage();
     await page.goto('https://www.saucedemo.com/');
     await page.fill('#user-name', 'standard_user');
