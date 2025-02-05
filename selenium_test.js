@@ -1,5 +1,5 @@
 const { Builder, By, until } = require('selenium-webdriver');
-const { expect } = require ('chai');
+import { expect } from 'chai';
 const chrome = require('selenium-webdriver/chrome');
 (async function seleniumCheckoutTest() {
   const driver = await new Builder().forBrowser('chrome').setChromeOptions(new chrome.Options().addArguments('--headless')).build();

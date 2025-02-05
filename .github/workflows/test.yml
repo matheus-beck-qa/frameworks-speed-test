@@ -7,6 +7,7 @@ jobs:
     runs-on: ubuntu-latest
 
     strategy:
+      fail-fast: false
       matrix:
         tool: [playwright, cypress, selenium]
 
@@ -21,10 +22,6 @@ jobs:
 
       - name: Install Dependencies
         run: npm install
-
-      - name: Install Playwright Browsers
-        if: matrix.tool == 'playwright'
-        run: npx playwright install --with-deps
 
       - name: Run Playwright Tests (10 times)
         if: matrix.tool == 'playwright'
