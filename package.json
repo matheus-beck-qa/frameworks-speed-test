@@ -1,0 +1,23 @@
+{
+  "name": "cypress-playwright-selenium",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test:cypress": "npx cypress run --quiet --browser chrome",
+    "test:selenium": "node selenium_test.js",
+    "test:playwright": "node playwright_test.js",
+    "test:all": "npm run test:cypress && npm run test:playwright && npm run test:selenium"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@playwright/test": "^1.50.1",
+    "axios": "^1.7.9",
+    "chai": "^5.1.2",
+    "chromedriver": "^132.0.2",
+    "cypress": "^14.0.1",
+    "selenium-webdriver": "^4.28.1"
+  }
+}
