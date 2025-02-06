@@ -21,6 +21,6 @@ import assert from 'assert';
     assert.strictEqual(successMessage, 'Thank you for your order!');
     const endTime = Date.now();
     const executionTime = (endTime - startTime) / 1000;
-    console.log(`🔥 Playwright Test Execution Time: ${executionTime} seconds`);
+    console.log(`Playwright Test Execution Time: ${executionTime} seconds`);
     await browser.close();
 })();

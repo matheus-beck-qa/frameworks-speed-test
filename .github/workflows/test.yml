@@ -26,28 +26,28 @@ jobs:
       - name: Install Playwright
         run: npx playwright install
 
-      - name: Run Playwright Tests (10 times)
+      - name: Run Playwright Tests (100 times)
         if: matrix.tool == 'playwright'
         run: |
-          for i in {1..10}
+          for i in {1..100}
           do
             echo "Run #$i"
             node playwright_test.js
           done
 
-      - name: Run Cypress Tests (10 times)
+      - name: Run Cypress Tests (100 times)
         if: matrix.tool == 'cypress'
         run: |
-          for i in {1..10}
+          for i in {1..100}
           do
             echo "Run #$i"
             npx cypress run --quiet --browser chrome
           done
 
-      - name: Run Selenium Tests (10 times)
+      - name: Run Selenium Tests (100 times)
         if: matrix.tool == 'selenium'
         run: |
-          for i in {1..10}
+          for i in {1..100}
           do
             echo "Run #$i"
             node selenium_test.js

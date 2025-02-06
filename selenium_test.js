@@ -23,7 +23,7 @@ import chrome from 'selenium-webdriver/chrome.js';
   } finally {
     const endTime = Date.now();
     const executionTime = (endTime - startTime) / 1000;
-    console.log(`🔥 Selenium Test Execution Time: ${executionTime} seconds`);
+    console.log(`Selenium Test Execution Time: ${executionTime} seconds`);
     await driver.quit();
   }
 })();
