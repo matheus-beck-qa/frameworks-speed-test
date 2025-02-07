@@ -85,7 +85,7 @@ jobs:
           python3 generate_chart.py
 
       - name: Upload Chart as Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: execution-time-chart
           path: execution_time_chart.png
