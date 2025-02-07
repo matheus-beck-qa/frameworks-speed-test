@@ -1,6 +1,14 @@
 name: Test Performance Benchmark
 
-on: [push, pull_request, workflow_dispatch]
+on: 
+  push:
+  workflow_dispatch:
+    inputs:
+      test_runs:
+        description: "Number of times to run each test"
+        required: false
+        default: 10
+        type: number
 
 jobs:
   test:
@@ -26,29 +34,58 @@ jobs:
       - name: Install Playwright
         run: npx playwright install
 
-      - name: Run Playwright Tests (100 times)
+      - name: Run Playwright Tests
         if: matrix.tool == 'playwright'
         run: |
-          for i in {1..100}
+          START=$(date +%s)
+          for i in $(seq 1 ${{ github.event.inputs.test_runs }})
           do
             echo "Run #$i"
             node playwright_test.js
           done
+          END=$(date +%s)
+          PLAYWRIGHT_TIME=$((END-START))
+          echo "PLAYWRIGHT_TIME=$PLAYWRIGHT_TIME" >> $GITHUB_ENV
 
-      - name: Run Cypress Tests (100 times)
+      - name: Run Cypress Tests
         if: matrix.tool == 'cypress'
         run: |
-          for i in {1..100}
+          START=$(date +%s)
+          for i in $(seq 1 ${{ github.event.inputs.test_runs }})
           do
             echo "Run #$i"
             npx cypress run --quiet --browser chrome
           done
+          END=$(date +%s)
+          CYPRESS_TIME=$((END-START))
+          echo "CYPRESS_TIME=$CYPRESS_TIME" >> $GITHUB_ENV
 
-      - name: Run Selenium Tests (100 times)
+      - name: Run Selenium Tests
         if: matrix.tool == 'selenium'
         run: |
-          for i in {1..100}
+          START=$(date +%s)
+          for i in $(seq 1 ${{ github.event.inputs.test_runs }})
           do
             echo "Run #$i"
             node selenium_test.js
           done
+          END=$(date +%s)
+          SELENIUM_TIME=$((END-START))
+          echo "SELENIUM_TIME=$SELENIUM_TIME" >> $GITHUB_ENV
+      
+      - name: Install Python and Dependencies
+        run: |
+          sudo apt update
+          sudo apt install python3 python3-pip -y
+          pip install matplotlib
+
+      - name: Generate Bar Chart
+        run: |
+          echo "Generating bar chart..."
+          python3 generate_chart.py
+
+      - name: Upload Chart as Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: execution-time-chart
+          path: execution_time_chart.png
