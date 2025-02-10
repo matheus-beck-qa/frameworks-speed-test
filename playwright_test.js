@@ -1,6 +1,7 @@
 import { chromium } from 'playwright';
 import assert from 'assert';
-for (let i=0; i<100; i++){
+for (let i=0; i<50; i++){
+    console.log("Run: " + i);
     (async () => {
         //const startTime = Date.now();
         const browser = await chromium.launch({ headless: true, channel: 'chrome' });

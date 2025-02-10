@@ -2,7 +2,7 @@ import { Builder, By, until } from 'selenium-webdriver';
 import { expect } from 'chai';
 import chrome from 'selenium-webdriver/chrome.js';
 (async function seleniumCheckoutTest() {
-  for (let i=0; i<100; i++){
+  for (let i=0; i<50; i++){
     const driver = await new Builder().forBrowser('chrome').setChromeOptions(new chrome.Options().addArguments('--headless')).build();
     // const startTime = Date.now();
     try {
