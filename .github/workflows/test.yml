@@ -88,4 +88,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: execution-time-chart
-          path: execution_time_chart.png
+          path: execution_time_chart_${{ matrix.tool }}.png
