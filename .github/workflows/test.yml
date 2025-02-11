@@ -80,11 +80,6 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3
 
-      - name: Download Execution Times
-        uses: actions/download-artifact@v4
-        with:
-          name: execution-times
-
       - name: Generate Bar Chart
         run: python3 generate_chart.py
 
@@ -92,4 +87,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: execution-time-chart
-          path: execution_time_chart_.png
+          path: execution_time_chart.png

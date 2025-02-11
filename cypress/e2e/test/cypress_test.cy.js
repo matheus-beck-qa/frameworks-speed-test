@@ -1,6 +1,6 @@
 describe('SauceDemo Checkout Test', () => {
-  it('Logs in, adds item to cart, and completes checkout', () => {
-    for (let i=0; i<50; i++){
+  for (let i = 0; i < 50; i++) {
+    it(`Test Run #${i + 1}`, () => {
       cy.visit('https://www.saucedemo.com/');
       cy.get('#user-name').type('standard_user');
       cy.get('#password').type('secret_sauce');
@@ -15,6 +15,6 @@ describe('SauceDemo Checkout Test', () => {
       cy.get('#continue').click();
       cy.get('#finish').click();
       cy.get('.complete-header').should('have.text', 'Thank you for your order!');
-    }
-  });
+    });
+  }
 });
