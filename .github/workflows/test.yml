@@ -40,27 +40,15 @@ jobs:
       - name: Run Playwright Tests
         if: matrix.tool == 'playwright'
         run: |
-          START=$(date +%s)
           TEST_RUNS=${{ github.event.inputs.test_runs }} node playwright_test.js
-          END=$(date +%s)
-          PLAYWRIGHT_TIME=$((END-START))
-          echo "PLAYWRIGHT_TIME=$PLAYWRIGHT_TIME" >> execution_times.txt
 
       - name: Run Cypress Tests
         if: matrix.tool == 'cypress'
         run: |
-          START=$(date +%s)
-          npx cypress run --quiet --browser chrome TEST_RUNS=${{ github.event.inputs.test_runs }} 
-          END=$(date +%s)
-          CYPRESS_TIME=$((END-START))
-          echo "CYPRESS_TIME=$CYPRESS_TIME" >> execution_times.txt
+          npx cypress run --quiet --browser chrome --env TEST_RUNS=${{ github.event.inputs.test_runs }} 
 
       - name: Run Selenium Tests
         if: matrix.tool == 'selenium'
         run: |
-          START=$(date +%s)
           TEST_RUNS=${{ github.event.inputs.test_runs }} node selenium_test.js
-          END=$(date +%s)
-          SELENIUM_TIME=$((END-START))
-          echo "SELENIUM_TIME=$SELENIUM_TIME" >> execution_times.txt
       
