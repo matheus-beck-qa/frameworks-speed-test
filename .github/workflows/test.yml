@@ -7,7 +7,7 @@ on:
       test_runs:
         description: "Number of times to run each test"
         required: false
-        default: 1
+        default: 10
         type: number
 
 jobs:
@@ -27,6 +27,9 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18
+      
+      - name: Set Test Iterations Environment Variable
+        run: echo "TEST_RUNS=${{ github.event.inputs.test_runs }}" >> $GITHUB_ENV
 
       - name: Install Dependencies
         run: npm install
@@ -38,40 +41,34 @@ jobs:
         if: matrix.tool == 'playwright'
         run: |
           START=$(date +%s)
-          for i in $(seq 1 ${{ github.event.inputs.test_runs }})
-          do
-            echo "Run #$i"
-            node playwright_test.js
-          done
+          TEST_RUNS=${{ github.event.inputs.test_runs }} node playwright_test.js
           END=$(date +%s)
           PLAYWRIGHT_TIME=$((END-START))
-          echo "PLAYWRIGHT_TIME=$PLAYWRIGHT_TIME" >> $GITHUB_ENV
+          echo "PLAYWRIGHT_TIME=$PLAYWRIGHT_TIME" >> execution_times.txt
 
       - name: Run Cypress Tests
         if: matrix.tool == 'cypress'
         run: |
           START=$(date +%s)
-          for i in $(seq 1 ${{ github.event.inputs.test_runs }})
-          do
-            echo "Run #$i"
-            npx cypress run --quiet --browser chrome
-          done
+          TEST_RUNS=${{ github.event.inputs.test_runs }} npx cypress run --quiet --browser chrome TEST_RUNS=$TEST_RUNS
           END=$(date +%s)
           CYPRESS_TIME=$((END-START))
-          echo "CYPRESS_TIME=$CYPRESS_TIME" >> $GITHUB_ENV
+          echo "CYPRESS_TIME=$CYPRESS_TIME" >> execution_times.txt
 
       - name: Run Selenium Tests
         if: matrix.tool == 'selenium'
         run: |
           START=$(date +%s)
-          for i in $(seq 1 ${{ github.event.inputs.test_runs }})
-          do
-            echo "Run #$i"
-            node selenium_test.js
-          done
+          TEST_RUNS=${{ github.event.inputs.test_runs }} node selenium_test.js
           END=$(date +%s)
           SELENIUM_TIME=$((END-START))
-          echo "SELENIUM_TIME=$SELENIUM_TIME" >> $GITHUB_ENV
+          echo "SELENIUM_TIME=$SELENIUM_TIME" >> execution_times.txt
+      
+      - name: Upload Execution Times as Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: execution-times
+          path: execution_times.txt
   
   generate-chart:
     runs-on: ubuntu-latest
@@ -79,6 +76,16 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
+
+      - name: Download Execution Times
+        uses: actions/download-artifact@v4
+        with:
+          name: execution-times
+      
+      - name: Read Execution Times and Set Environment Variables
+        run: |
+          cat execution_times.txt
+          export $(cat execution_times.txt | xargs)
         
       - name: Install Python and Dependencies
         run: |

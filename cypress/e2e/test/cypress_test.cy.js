@@ -1,5 +1,7 @@
+const testRuns = Cypress.env('TEST_RUNS') || 10;
+
 describe('SauceDemo Checkout Test', () => {
-  for (let i = 0; i < 50; i++) {
+  for (let i = 0; i < testRuns; i++) {
     it(`Test Run #${i + 1}`, () => {
       cy.visit('https://www.saucedemo.com/');
       cy.get('#user-name').type('standard_user');

@@ -2,6 +2,8 @@ import { Builder, By, until } from 'selenium-webdriver';
 import { expect } from 'chai';
 import chrome from 'selenium-webdriver/chrome.js';
 
+const testRuns = process.env.TEST_RUNS || 10;
+
 (async function seleniumCheckoutTest() {
   const driver = await new Builder()
     .forBrowser('chrome')
@@ -9,7 +11,7 @@ import chrome from 'selenium-webdriver/chrome.js';
     .build();
 
   try {
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < testRuns; i++) {
       console.log(`Test Run: ${i + 1}`);
       await driver.get('https://www.saucedemo.com/');
       await driver.findElement(By.id('user-name')).sendKeys('standard_user');

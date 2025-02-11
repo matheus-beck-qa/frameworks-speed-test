@@ -1,11 +1,13 @@
 import { chromium } from 'playwright';
 import assert from 'assert';
 
+const testRuns = process.env.TEST_RUNS || 10;
+
 (async () => {
   const browser = await chromium.launch({ headless: true, channel: 'chrome' });
   const page = await browser.newPage();
 
-  for (let i = 0; i < 50; i++) {
+  for (let i = 0; i < testRuns; i++) {
     console.log(`Test Run: ${i + 1}`);
     await page.goto('https://www.saucedemo.com/');
     await page.fill('#user-name', 'standard_user');
