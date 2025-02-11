@@ -45,7 +45,7 @@ jobs:
       - name: Run Cypress Tests
         if: matrix.tool == 'cypress'
         run: |
-          npx cypress run --quiet --browser chrome --env TEST_RUNS=${{ github.event.inputs.test_runs }} 
+          npx cypress run --quiet --browser chrome --headless --env TEST_RUNS=${{ github.event.inputs.test_runs }} 
 
       - name: Run Selenium Tests
         if: matrix.tool == 'selenium'
