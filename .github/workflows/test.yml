@@ -50,7 +50,7 @@ jobs:
         if: matrix.tool == 'cypress'
         run: |
           START=$(date +%s)
-          TEST_RUNS=${{ github.event.inputs.test_runs }} npx cypress run --quiet --browser chrome TEST_RUNS=$TEST_RUNS
+          npx cypress run --quiet --browser chrome TEST_RUNS=${{ github.event.inputs.test_runs }} 
           END=$(date +%s)
           CYPRESS_TIME=$((END-START))
           echo "CYPRESS_TIME=$CYPRESS_TIME" >> execution_times.txt
