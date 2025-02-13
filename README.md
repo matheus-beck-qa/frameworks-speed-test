@@ -44,19 +44,14 @@ To run/debug the tests locally (not in parallel):
 
 ---
 
-## **📊 Results & Analysis**
-
-- The execution times of each test framework can be seen inside https://github.com/matheus-beck-qa/frameworks-speed-test/actions
-- Excel file for reference: `Frameworks Performance Benchmark.xlsx`
-
----
-
 ## **📜 GitHub Actions Workflow**
 
 The **GitHub Actions** workflow (`.github/workflows/test.yml`) executes the tests in parallel on the same browser (chrome). The workflow:
 
 - Runs all four frameworks **simultaneously**. 
 - Varies the number of test executions per framework. 
+- The execution time of each test framework can be seen inside https://github.com/matheus-beck-qa/frameworks-speed-test/actions/workflows/test.yml
+- Excel file for reference: `Frameworks Performance Benchmark.xlsx`
 
 ---
 
