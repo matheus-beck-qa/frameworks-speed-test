@@ -11,7 +11,7 @@ ${TEST_RUNS} =    Convert To Integer    ${env_test_runs}
 SauceDemo Checkout Test
     FOR    ${i}    IN RANGE    ${TEST_RUNS}
         Log To Console    Running test #${i + 1}
-        New Browser    browser=chromium    headless=True
+        New Browser    browser=chrome    headless=True
         New Page    ${testConfig["url"]}
         Fill Text    ${testConfig["selectors"]["usernameField"]}    ${testConfig["username"]}
         Fill Text    ${testConfig["selectors"]["passwordField"]}    ${testConfig["password"]}
