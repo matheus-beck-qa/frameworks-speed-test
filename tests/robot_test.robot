@@ -4,7 +4,7 @@ Variables  ./../testConfig.py
 
 *** Variables ***
 ${TEST_RUNS}    ${10}
-${env_test_runs} =    Get Environment Variable    TEST_RUNS    default=10
+${env_test_runs} =    Get Environment Variable    TEST_RUNS    default=${10}
 ${TEST_RUNS} =    Convert To Integer    ${env_test_runs}
 
 *** Test Cases ***
