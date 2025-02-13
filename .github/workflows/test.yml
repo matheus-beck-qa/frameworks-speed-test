@@ -29,7 +29,7 @@ jobs:
           node-version: 18
       
       - name: Set Test Iterations Environment Variable
-        run: echo "TEST_RUNS=${{ github.event.inputs.test_runs }}" >> $GITHUB_ENV
+        run: echo "TEST_RUNS=${{ github.event.inputs.test_runs || 10 }}" >> $GITHUB_ENV
 
       - name: Install Dependencies
         run: npm install
