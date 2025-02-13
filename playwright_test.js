@@ -1,31 +1,29 @@
+import { testConfig } from './testConfig.js';
 import { chromium } from 'playwright';
 import assert from 'assert';
 
 const testRuns = process.env.TEST_RUNS || 10;
-
 (async () => {
   const browser = await chromium.launch({ headless: true, channel: 'chrome' });
   const page = await browser.newPage();
 
   for (let i = 0; i < testRuns; i++) {
     console.log(`Test Run: ${i + 1}`);
-    await page.goto('https://www.saucedemo.com/');
-    await page.fill('#user-name', 'standard_user');
-    await page.fill('#password', 'secret_sauce');
-    await page.click('#login-button');
-    await page.waitForSelector('.inventory_list');
-    await page.click('.inventory_item:first-child button');
-    await page.click('.shopping_cart_link');
-    await page.click('.checkout_button');
-    await page.fill('#first-name', 'John');
-    await page.fill('#last-name', 'Doe');
-    await page.fill('#postal-code', '12345');
-    await page.click('#continue');
-    await page.click('#finish');
-
-    const successMessage = await page.innerText('.complete-header');
+    await page.goto(testConfig.url);
+    await page.fill(testConfig.selectors.usernameField, testConfig.username);
+    await page.fill(testConfig.selectors.passwordField, testConfig.password);
+    await page.click(testConfig.selectors.loginButton);
+    await page.waitForSelector(testConfig.selectors.inventoryList);
+    await page.click(testConfig.selectors.firstItemButton);
+    await page.click(testConfig.selectors.cartLink);
+    await page.click(testConfig.selectors.checkoutButton);
+    await page.fill(testConfig.selectors.firstNameField, testConfig.firstName);
+    await page.fill(testConfig.selectors.lastNameField, testConfig.lastName);
+    await page.fill(testConfig.selectors.postalCodeField, testConfig.postalCode);
+    await page.click(testConfig.selectors.continueButton);
+    await page.click(testConfig.selectors.finishButton);
+    const successMessage = await page.innerText(testConfig.selectors.completeHeader);
     assert.strictEqual(successMessage, 'Thank you for your order!');
   }
-
   await browser.close();
 })();

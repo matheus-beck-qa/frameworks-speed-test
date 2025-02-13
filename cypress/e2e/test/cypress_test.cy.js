@@ -1,22 +1,23 @@
+import { testConfig } from '../../../testConfig.js';
 const testRuns = Cypress.env('TEST_RUNS') || 10;
 
 describe('SauceDemo Checkout Test', () => {
   for (let i = 0; i < testRuns; i++) {
     it(`Test Run #${i + 1}`, () => {
-      cy.visit('https://www.saucedemo.com/');
-      cy.get('#user-name').type('standard_user');
-      cy.get('#password').type('secret_sauce');
-      cy.get('#login-button').click();
-      cy.url().should('include', '/inventory.html');
-      cy.get('.inventory_item:first-child button').click();
-      cy.get('.shopping_cart_link').click();
-      cy.get('.checkout_button').click();
-      cy.get('#first-name').type('John');
-      cy.get('#last-name').type('Doe');
-      cy.get('#postal-code').type('12345');
-      cy.get('#continue').click();
-      cy.get('#finish').click();
-      cy.get('.complete-header').should('have.text', 'Thank you for your order!');
+      cy.visit(testConfig.url);
+      cy.get(testConfig.selectors.usernameField).type(testConfig.username);
+      cy.get(testConfig.selectors.passwordField).type(testConfig.password);
+      cy.get(testConfig.selectors.loginButton).click();
+      cy.get(testConfig.selectors.inventoryList).should('be.visible')
+      cy.get(testConfig.selectors.firstItemButton).click();
+      cy.get(testConfig.selectors.cartLink).click();
+      cy.get(testConfig.selectors.checkoutButton).click();
+      cy.get(testConfig.selectors.firstNameField).type(testConfig.firstName);
+      cy.get(testConfig.selectors.lastNameField).type(testConfig.lastName);
+      cy.get(testConfig.selectors.postalCodeField).type(testConfig.postalCode);
+      cy.get(testConfig.selectors.continueButton).click();
+      cy.get(testConfig.selectors.finishButton).click();
+      cy.get(testConfig.selectors.completeHeader).should('have.text', 'Thank you for your order!');
     });
   }
 });
