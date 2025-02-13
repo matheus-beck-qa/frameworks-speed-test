@@ -49,12 +49,12 @@ jobs:
 
       - name: Run Robot Framework Tests
         if: matrix.tool == 'robot'
-        run: robot --variable TEST_RUNS:${{ github.event.inputs.test_runs }} robot_test.robot
+        run: robot --variable TEST_RUNS:${{ github.event.inputs.test_runs }} tests/robot_test.robot
 
       - name: Run Playwright Tests
         if: matrix.tool == 'playwright'
         run: |
-          TEST_RUNS=${{ github.event.inputs.test_runs }} node playwright_test.js
+          TEST_RUNS=${{ github.event.inputs.test_runs }} node tests/playwright_test.js
 
       - name: Run Cypress Tests
         if: matrix.tool == 'cypress'
@@ -64,5 +64,5 @@ jobs:
       - name: Run Selenium Tests
         if: matrix.tool == 'selenium'
         run: |
-          TEST_RUNS=${{ github.event.inputs.test_runs }} node selenium_test.js
+          TEST_RUNS=${{ github.event.inputs.test_runs }} node tests/selenium_test.js
       
