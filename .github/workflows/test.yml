@@ -49,7 +49,7 @@ jobs:
 
       - name: Run Robot Framework Tests
         if: matrix.tool == 'robot'
-        run: robot --variable TEST_RUNS=${{ github.event.inputs.test_runs }} robot_test.robot
+        run: robot --variable TEST_RUNS:${{ github.event.inputs.test_runs }} robot_test.robot
 
       - name: Run Playwright Tests
         if: matrix.tool == 'playwright'
