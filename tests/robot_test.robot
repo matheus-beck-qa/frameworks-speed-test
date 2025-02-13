@@ -1,6 +1,6 @@
 *** Settings ***
 Library  Browser
-Variables  testConfig.py
+Variables  ./../testConfig.py
 
 *** Variables ***
 ${TEST_RUNS}    ${10}

@@ -1,4 +1,4 @@
-import { testConfig } from './testConfig.js';
+import { testConfig } from './../testConfig.js';
 import { expect } from 'chai';
 import chrome from 'selenium-webdriver/chrome.js';
 import { Builder, By, until } from 'selenium-webdriver';

@@ -4,9 +4,9 @@
   "main": "index.js",
   "scripts": {
     "test:cypress": "npx cypress run --quiet --browser chrome",
-    "test:selenium": "node selenium_test.js",
-    "test:playwright": "node playwright_test.js",
-    "test:robot": "robot robot_test.robot",
+    "test:selenium": "node tests/selenium_test.js",
+    "test:playwright": "node tests/playwright_test.js",
+    "test:robot": "robot tests/robot_test.robot",
     "test:all": "npm run test:cypress && npm run test:playwright && npm run test:selenium && npm run test:robot"
   },
   "type": "module",

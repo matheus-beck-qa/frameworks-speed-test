@@ -1,4 +1,4 @@
-import { testConfig } from '../../../testConfig.js';
+import { testConfig } from '../testConfig.js';
 const testRuns = Cypress.env('TEST_RUNS') || 10;
 
 describe('SauceDemo Checkout Test', () => {

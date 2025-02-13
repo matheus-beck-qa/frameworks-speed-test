@@ -2,16 +2,11 @@ import { defineConfig } from 'cypress';
 
 export default defineConfig({
   e2e: {
+    supportFile: false,
     browser: 'chrome',
-    setupNodeEvents(on, config) {
-      on('task', {
-        log(message) {
-          console.log(message);  // This will print to the terminal
-          return null;  // Return null since no value is needed
-        }
-      });
-    },
+    specPattern: 'tests/*.cy.js',
+    setupNodeEvents(on, config) {},
   },
-  video: false,  // Disables video recording to avoid extra logs
+  video: false,
   reporter: 'dot',
 });

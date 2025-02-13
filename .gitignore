@@ -6,3 +6,4 @@ log.html
 output.xml
 playwright-log.txt
 browser
+__pycache__

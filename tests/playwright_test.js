@@ -1,4 +1,4 @@
-import { testConfig } from './testConfig.js';
+import { testConfig } from './../testConfig.js';
 import { chromium } from 'playwright';
 import assert from 'assert';
 
