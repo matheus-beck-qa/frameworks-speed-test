@@ -29,7 +29,7 @@ jobs:
           node-version: 18
       
       - name: Set Test Iterations Environment Variable
-        run: echo "TEST_RUNS=${{ github.event.inputs.test_runs || 10 }}" >> $GITHUB_ENV
+        run: echo "TEST_RUNS=${{ github.event.inputs.test_runs }}" >> $GITHUB_ENV
 
       - name: Install Dependencies
         run: npm install
@@ -49,7 +49,9 @@ jobs:
 
       - name: Run Robot Framework Tests
         if: matrix.tool == 'robot'
-        run: robot --variable TEST_RUNS:${{ github.event.inputs.test_runs }} tests/robot_test.robot
+        run: |
+          TEST_RUNS=${{ github.event.inputs.test_runs || '10' }}
+          robot --variable TEST_RUNS:${TEST_RUNS} tests/robot_test.robot
 
       - name: Run Playwright Tests
         if: matrix.tool == 'playwright'

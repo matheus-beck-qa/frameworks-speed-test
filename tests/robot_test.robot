@@ -3,15 +3,13 @@ Library  Browser
 Variables  ./../testConfig.py
 
 *** Variables ***
-${TEST_RUNS}    ${10}
-${env_test_runs} =    Get Environment Variable    TEST_RUNS    default=${10}
-${TEST_RUNS} =    Convert To Integer    ${env_test_runs}
+${TEST_RUNS}    10  
 
 *** Test Cases ***
 SauceDemo Checkout Test
     FOR    ${i}    IN RANGE    ${TEST_RUNS}
         Log To Console    Running test #${i + 1}
-        New Browser    browser=chrome    headless=True
+        New Browser    browser=chromium     channel=chrome    headless=True    args=["--headless"]
         New Page    ${testConfig["url"]}
         Fill Text    ${testConfig["selectors"]["usernameField"]}    ${testConfig["username"]}
         Fill Text    ${testConfig["selectors"]["passwordField"]}    ${testConfig["password"]}
