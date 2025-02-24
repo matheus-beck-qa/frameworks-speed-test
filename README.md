@@ -1,5 +1,7 @@
 # **Speed Comparison of Testing Frameworks**
 
+[![Youtube Thumbnail](what-is-the-fastest-testing-framework.png)](https://youtu.be/Sw0vnM7j_5g)
+
 🚀 This repository compares the execution time of four popular test automation frameworks: **Cypress, Selenium (JavaScript), Playwright, and Robot Framework**. 
 
 The number of times to run each test can be defined in **GitHub Actions** and the tests run in parallel. The execution times were recorded and visualized in an **Excel graph** to analyze performance differences.
